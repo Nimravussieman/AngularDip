@@ -1,0 +1,16 @@
+{
+  "ExpandedNodes": [
+    "",
+    "\\src",
+    "\\src\\app",
+    "\\src\\app\\api-authorization\\logout",
+    "\\src\\app\\components\\sidebar",
+    "\\src\\app\\maps",
+    "\\src\\app\\Models",
+    "\\src\\app\\publicComponents",
+    "\\src\\app\\publicComponents\\publicContacts",
+    "\\src\\app\\services"
+  ],
+  "SelectedNode": "\\src\\app\\Models\\PublicContactModel.ts",
+  "PreviewInSolutionExplorer": false
+}

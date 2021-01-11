@@ -1,0 +1,175 @@
+<div class="panel-header panel-header-sm">
+</div>
+
+<div class="main-content">
+
+  <!-- <ul class="nav">
+       <li routerLinkActive="active" *ngFor="let contact of contacts" class="{{menuItem.class}} nav-item">
+           <a [routerLink]="[menuItem.path]">
+               <i class="now-ui-icons {{menuItem.icon}}"></i>
+               <p>{{menuItem.title}}</p>
+           </a>
+       </li>
+   </ul> -->
+
+  <!--<div class="row">
+    <div class="col-md-12">
+      <div class="card ">
+        <div class="card-header ">
+          Google Maps
+        </div>
+        <div class="card-body ">
+          <div id="map" class="map"></div>
+        </div>
+      </div>
+    </div>
+  </div>-->
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+
+
+
+          <table class="table">
+            <thead class=" text-primary">
+              <th class="col-md-12 pr-1">
+                <input type="text" class="form-control" placeholder="Search by name" [(ngModel)]="name" />
+              </th>
+              <th class="text-right">
+                <button class="form-control" type="button" (click)="retrieveItems()">
+                  <i class="now-ui-icons ui-1_zoom-bold"></i>
+                </button>
+              </th>
+            </thead>
+          </table>
+        </div>
+      </div>
+
+
+      <div class="card" *ngIf="count">
+        <div class="card">
+          <div class="card-body">
+            <div class="d-flex justify-content-center">
+              <pagination-controls *ngIf="count > pageSize" previousLabel="Prev" nextLabel="Next" [responsive]="true"
+                (pageChange)="handlePageChange($event)">
+              </pagination-controls>
+            </div>
+
+            <ul class="list-group">
+              <li [class.bg-dark]="isCurrentItem(item)" [class.list-group-item]="true"
+              *ngFor="
+      let item of items | paginate : {
+              itemsPerPage: pageSize,
+              currentPage: page,
+              totalItems: count
+            };
+      let i = index
+      " [class.active]="i == currentIndex" (click)="setActiveItem(item, i)">
+                <ng-template [ngTemplateOutlet]="loadTemplate(item,i)"
+                  [ngTemplateOutletContext]="{ $implicit: item, ind:i}">
+                </ng-template>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <ng-template #nameTemplate let-item>
+      <div class="author">
+        <h5 class="title">{{ item.name.lastName }} {{ item.name.FirstName }}</h5>
+      </div>
+    </ng-template>
+
+
+    <ng-template #fullTemplate let-item>
+      <h4 class="d-flex justify-content-center title">
+        {{ currentItem.name.lastName }} {{ currentItem.name.FirstName }}
+      </h4>
+      <div class="container">
+        <div class="d-flex">
+            <table class="table">
+              <span *ngFor="let row of currentItem | keyvalue">
+                <span style="color: white !important;" *ngIf="row.value">
+                  <!-- && row.key != 'name' -->
+                  <tbody class="">
+                    <tr>
+                      <td class="p-2 thead-light">
+                        <strong>{{row.key}}:</strong>
+                      </td>
+                    </tr>
+                    <tr>
+                      <td class="p-2 flex-grow-1 ">
+                        <ng-template [ngTemplateOutlet]="loadTemplate2(row.value)"
+                          [ngTemplateOutletContext]="{ $implicit: row.value}">
+                        </ng-template>
+                      </td>
+                    </tr>
+                  </tbody>
+                </span>
+              </span>
+              <!-- <tbody>
+          <tr *ngFor="let row of currentItem | keyvalue">
+            <span class="row" style="color: white !important;" *ngIf="row.value">
+
+              <td class="col-md-9">
+                <strong>{{row.key}}:</strong>
+              </td>
+              <td class="text-right">
+                <ng-template [ngTemplateOutlet]="loadTemplate2(row.value)"
+                  [ngTemplateOutletContext]="{ $implicit: row.value}">
+                </ng-template>
+              </td>
+            </span>
+          </tr> 
+        </tbody>
+ -->
+            </table>
+          </div>
+        </div>
+    </ng-template>
+
+    <!-- row.value  !== undefined && row.value !== null -->
+
+
+
+    <ng-template #partHasNextTemplate let-item2>
+
+      <span *ngFor="let row2 of item2 | keyvalue">
+        <span class="" style="color: white !important;" *ngIf="row2.value">
+          <tr class="">
+            <td  class="p-2 thead-light">
+              <strong>{{row2.key}}:</strong>
+            </td>
+          </tr>
+          <!-- <tr> -->
+            <td class="p-2 flex-grow-1 ">
+              <ng-template [ngTemplateOutlet]="loadTemplate2(row2.value)"
+                [ngTemplateOutletContext]="{ $implicit: row2.value}">
+              </ng-template>
+            </td>
+          <!-- </tr> -->
+        </span>
+      </span>
+
+    </ng-template>
+
+
+    <ng-template #partArrayTemplate let-arr>
+        <tr class="" *ngFor="let a of arr">
+          <span style="color: white !important;" *ngIf="a">
+            <td class="p-2">
+              <ng-template [ngTemplateOutlet]="loadTemplate2(a)" [ngTemplateOutletContext]="{ $implicit: a}">
+              </ng-template>
+            </td>
+          </span>
+        </tr>
+    </ng-template>
+
+
+    <ng-template #partNotNextTemplate let-item>
+      {{item}}
+    </ng-template>
