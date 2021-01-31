@@ -58,8 +58,7 @@
             </div>
 
             <ul class="list-group">
-              <li [class.bg-dark]="isCurrentItem(item)" [class.list-group-item]="true"
-              *ngFor="
+              <li [class.bg-dark]="isCurrentItem(item)" [class.list-group-item]="true" *ngFor="
       let item of items | paginate : {
               itemsPerPage: pageSize,
               currentPage: page,
@@ -91,27 +90,27 @@
       </h4>
       <div class="container">
         <div class="d-flex">
-            <table class="table">
-              <span *ngFor="let row of currentItem | keyvalue">
-                <span style="color: white !important;" *ngIf="row.value">
-                  <!-- && row.key != 'name' -->
-                  <tbody class="">
-                    <tr>
-                      <td class="p-2 thead-light">
-                        <strong>{{row.key}}:</strong>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td class="p-2 flex-grow-1 ">
-                        <ng-template [ngTemplateOutlet]="loadTemplate2(row.value)"
-                          [ngTemplateOutletContext]="{ $implicit: row.value}">
-                        </ng-template>
-                      </td>
-                    </tr>
-                  </tbody>
-                </span>
+          <table class="table">
+            <span *ngFor="let row of currentItem | keyvalue">
+              <span style="color: white !important;" *ngIf="row.value  && row.key != 'name' && row.key != 'permissions'">
+                <!-- && row.key != 'name' -->
+                <tbody class="">
+                  <tr>
+                    <td class="p-2 thead-light">
+                      <strong>{{row.key}}:</strong>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td class="p-2 flex-grow-1 ">
+                      <ng-template [ngTemplateOutlet]="loadTemplate2(row.value)"
+                        [ngTemplateOutletContext]="{ $implicit: row.value}">
+                      </ng-template>
+                    </td>
+                  </tr>
+                </tbody>
               </span>
-              <!-- <tbody>
+            </span>
+            <!-- <tbody>
           <tr *ngFor="let row of currentItem | keyvalue">
             <span class="row" style="color: white !important;" *ngIf="row.value">
 
@@ -127,9 +126,9 @@
           </tr> 
         </tbody>
  -->
-            </table>
-          </div>
+          </table>
         </div>
+      </div>
     </ng-template>
 
     <!-- row.value  !== undefined && row.value !== null -->
@@ -141,16 +140,16 @@
       <span *ngFor="let row2 of item2 | keyvalue">
         <span class="" style="color: white !important;" *ngIf="row2.value">
           <tr class="">
-            <td  class="p-2 thead-light">
+            <td class="p-2 thead-light">
               <strong>{{row2.key}}:</strong>
             </td>
           </tr>
           <!-- <tr> -->
-            <td class="p-2 flex-grow-1 ">
-              <ng-template [ngTemplateOutlet]="loadTemplate2(row2.value)"
-                [ngTemplateOutletContext]="{ $implicit: row2.value}">
-              </ng-template>
-            </td>
+          <td class="p-2 flex-grow-1 ">
+            <ng-template [ngTemplateOutlet]="loadTemplate2(row2.value)"
+              [ngTemplateOutletContext]="{ $implicit: row2.value}">
+            </ng-template>
+          </td>
           <!-- </tr> -->
         </span>
       </span>
@@ -159,14 +158,14 @@
 
 
     <ng-template #partArrayTemplate let-arr>
-        <tr class="" *ngFor="let a of arr">
-          <span style="color: white !important;" *ngIf="a">
-            <td class="p-2">
-              <ng-template [ngTemplateOutlet]="loadTemplate2(a)" [ngTemplateOutletContext]="{ $implicit: a}">
-              </ng-template>
-            </td>
-          </span>
-        </tr>
+      <tr class="" *ngFor="let a of arr">
+        <span style="color: white !important;" *ngIf="a">
+          <td class="p-2">
+            <ng-template [ngTemplateOutlet]="loadTemplate2(a)" [ngTemplateOutletContext]="{ $implicit: a}">
+            </ng-template>
+          </td>
+        </span>
+      </tr>
     </ng-template>
 
 

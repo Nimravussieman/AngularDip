@@ -1,15 +1,17 @@
 <div class="wrapper">
-    <div class="sidebar" data-color="red">
+    <div class="sidebar" data-color="blue">
         <app-sidebar [isAuthenticated]="isAuthenticated"></app-sidebar>
     </div>
+    
     <div class="main-panel">
-      <!--<app-navbar></app-navbar>-->
-      <!--<app-navbar *ngIf="!(isAuthenticated)"><app-login-menu (onChanged)="onChanged($event)"></app-login-menu></app-navbar>-->
-      <!--<app-navbar><app-login-menu (onChanged)="onChanged($event)"></app-login-menu></app-navbar>-->
-      <!--<app-login-menu (onChanged)="onChanged($event)"></app-login-menu>-->
       <app-navbar>  <app-login-menu></app-login-menu> </app-navbar>
 
       <router-outlet style="min-height:100vh"></router-outlet>
+      
       <app-footer></app-footer>
     </div>
 </div>
+
+
+
+

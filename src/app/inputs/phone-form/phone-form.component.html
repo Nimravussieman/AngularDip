@@ -1,0 +1,188 @@
+<!-- [formGroup]="form" -->
+<!-- [formGroupName]="form" -->
+<!-- <form [formGroup]="this.form.parent"> -->
+  <div class="row" [formGroup]="form">
+    <input formControlName="id" hidden />
+    <div class="col-md-5 pr-1">
+      <div class="form-group">
+        <label>Number</label>
+        <input type="tel" class="form-control" name="value" formControlName="value" />
+      </div>
+    </div>
+    <div class="col-md-5 px-1">
+      <div class="form-group">
+        <label>Type</label>
+        <select class="form-control" name="type" formControlName="type">
+          <option value=""></option>
+          <option *ngFor="let type of this.service.PhoneType" [value]="type.name" [disabled]="selectCheck(type.name)"
+            [selected]="selectCheck(type.name)">{{type.name }}
+          </option>
+        </select>
+      </div>
+    </div>
+    <!-- <div class="col-md-2 pl-1">
+    <div class="form-group">
+      <label></label>
+      <button class="form-control btn btn-default" (click)="dell(i,'phones')">delete</button>
+    </div>
+  </div> -->
+  </div>
+<!-- </form> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+          <!-- #region Phones contact item -->
+          <div class="row">
+            <div class="card">
+              <div class="card-header">
+                <div class="row">
+                  <div class="col-md-9 pr-1">
+                    <label>Phones</label>
+                  </div>
+                  <div class=" col-md-3 pl-1">
+                    <button class="btn btn-primary" (click)="addTest('phones')">
+                      Add phone
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body" formArrayName="phones">
+                <div class="row" *ngFor="let phone of this?.item?.phones; let i = index">
+
+                  <phone-form [form]="getSetGroup(phone,'phones')" ></phone-form>
+
+                  <div class="col-md-2 pl-1">
+                    <div class="form-group">
+                      <label></label>
+                      <button class="form-control btn btn-default" (click)="dell(i,'phones')">delete</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- #endregion -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="row">
+  <div class="card">
+    <div class="card-header">
+      <h5 class="title">Edit Address</h5>
+    </div>
+    <div class="card-body">
+
+      <div class="form-group">
+        <label>Address</label>
+        <input class="form-control" name="Address" [(ngModel)]="this.item.value" [disabled]="!isEditMode" required />
+
+        <div class="alert alert-danger"
+                *ngIf="myForm.controls['userEmail'].invalid && myForm.controls['userEmail'].touched">
+                Некорректный email
+                </div>
+      </div>
+
+
+
+      <form [formGroup]="formName()" novalidate (ngSubmit)="onSubmit()">
+        <mat-card class="shipping-card">
+          <mat-card-header>
+            <mat-card-title>Phone {{index}}</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <input hidden formControlName="id">
+            <div class="row">
+              <div class="col">
+                <mat-form-field class="full-width">
+                  <input matInput placeholder="phone" formControlName="value">
+                  <mat-error *ngIf="addressForm.controls['value'].hasError('required')">
+                    Phone name is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+            <div class="row">
+              <div class="col">
+                <mat-form-field class="full-width">
+                  <mat-select placeholder="Phone type" formControlName="PhoneType">
+                    <mat-option *ngFor="let type of this.service.PhoneType" [value]="type">
+                      {{ type.name }}
+                    </mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="addressForm.controls['phoneType'].hasError('required')">
+                    State is <strong>required</strong>
+                  </mat-error>
+                </mat-form-field>
+              </div>
+            </div>
+
+
+          </mat-card-content>
+          <mat-card-actions>
+            <button mat-raised-button color="primary" type="submit">Submit</button>
+          </mat-card-actions>
+        </mat-card>
+      </form>
+    </div>
+  </div> -->

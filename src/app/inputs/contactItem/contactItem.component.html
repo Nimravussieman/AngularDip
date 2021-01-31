@@ -1,0 +1,462 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+  <div class="col-md-12">
+    <div class="card">
+      <div class="card-header">
+        <div class="row">
+          <div class="col-md-9 pr-1">
+            <h5 class="title">Edit Contact</h5>
+          </div>
+          <div class="col-md-3 pl-1">
+            <button (click)="submit()" class="form-control btn btn-default">ADD</button>
+          </div>
+        </div>
+      </div>
+      <div class="card-body" (click)="forPermishClick($event)" #card>
+
+
+
+        <form [formGroup]="mainForm" novalidate (ngSubmit)="submit(mainForm.value)" *ngIf="isReady">
+          <input formControlName="id" hidden>
+          <div formGroupName="name">
+            <div class="row">
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>First Name</label>
+                  <input class="form-control" name="firstName" formControlName="firstName" />
+                </div>
+                <!-- <div class="alert alert-danger" *ngIf="mainForm.controls['name'].controls['firstName'].invalid">
+                  First Name ?
+                </div> -->
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Last Name</label>
+                  <input class="form-control" name="lastName" formControlName="lastName" />
+                  <!-- <div class="alert alert-danger" *ngIf="mainForm.controls['name'].lastName.invalid ">
+                  Last Name ?
+                </div> -->
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="form-group">
+                  <label>Surname</label>
+                  <input class="form-control" name="surName" formControlName="surName" />
+                </div>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="row">
+            <div class="col-md-8 pr-1">
+              <div class="form-group" formGroupName="photo">
+                <input formControlName="id" hidden />
+                <label>Photo</label>
+                <input class="form-control " name="photoName" formControlName="name" />
+                <input type="file" name="imageData" formControlName="imageData" (change)="onFileChanged($event)">
+              </div>
+            </div>
+            <div class="col-md-4 pl-1">
+              <div class="form-group">
+                <label></label>
+                <button type="button" class="form-control btn btn-default" (click)="isShowPerm=!isShowPerm"
+                  #toggleButton>Permissions</button>
+                <!-- <select class="form-control" name="type" formGroupName="permissions" multiple>
+                  <option value=""></option>
+                  <option *ngFor="let item of this.mainForm.controls['permissions'].value | keyvalue" [value]="item.value"
+                    [selected]="true"
+                    >
+                    {{item.key.replace("_"," ") }}</option>
+                </select> -->
+                <ul [hidden]="!isShowPerm" class="list-group"
+                  *ngFor="let item of this.mainForm.controls['permissions'].value | keyvalue"
+                  formGroupName="permissions">
+                  <li class="list-group-item"><input type="checkbox"
+                      [formControlName]="item.key" />{{item.key.replace("_"," ") }}</li>
+                </ul>
+              </div>
+            </div>
+          </div>
+
+
+
+
+
+
+
+          <div class="row">
+            <div class="col-md-6 pr-1">
+              <div class="form-group">
+                <label>Date of birth</label>
+                <input type="date" class="form-control" name="dateOfBirth" formControlName="dateOfBirth">
+              </div>
+            </div>
+            <div class="col-md-6 pl-1">
+              <div class="form-group">
+                <label>Position</label>
+                <input type="text" class="form-control" name="position" formControlName="position">
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="row">
+            <div class="col-md-6 pr-1">
+              <div class="form-group">
+                <label>Contact type</label>
+                <select class="form-control" name="type" formControlName="contactType">
+                  <option value=""></option>
+                  <option *ngFor="let type of this.service.ContactType" [value]="type.name"
+                    [disabled]="type.name==this?.item?.type" [selected]="type.name==this?.item?.type">
+                    {{type.name }}</option>
+                </select>
+              </div>
+            </div>
+            <div class="col-md-6 pl-1">
+              <div class="form-group">
+                <label>Contact source</label>
+                <select class="form-control" name="type" formControlName="contactSource">
+                  <option value=""></option>
+                  <option *ngFor="let type of this.service.ContactSources" [value]="type.name"
+                    [disabled]="type.name==this?.item?.source">
+                    {{type.name }}</option>
+                </select>
+              </div>
+            </div>
+          </div>
+
+
+
+          <div class="row">
+            <div class="col-md-12">
+              <div class="form-group">
+                <label>Description</label>
+                <textarea class="form-control " formControlName="description"></textarea>
+              </div>
+            </div>
+          </div>
+
+
+
+
+          <!-- #region Phones -->
+          <div class="row">
+            <div class="card">
+              <div class="card-header">
+                <div class="row">
+                  <div class="col-md-9 pr-1">
+                    <label>Phones</label>
+                  </div>
+                  <div class=" col-md-3 pl-1">
+                    <button type="button" class="btn btn-primary" (click)="add('phones')">
+                      Add phone
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body" formArrayName="phones">
+                <div class="row" [formGroupName]="i"
+                  *ngFor="let phone of mainForm.controls['phones']['controls']; let i = index">
+                  <input formControlName="id" hidden />
+                  <div class="col-md-5 pr-1">
+                    <div class="form-group">
+                      <label>Number</label>
+                      <input type="tel" class="form-control" name="value" formControlName="value" />
+                    </div>
+                  </div>
+                  <div class="col-md-5 px-1">
+                    <div class="form-group">
+                      <label>Type</label>
+                      <select class="form-control" name="type" formControlName="type">
+                        <option value=""></option>
+                        <option *ngFor="let type of this.service.PhoneType" [value]="type.name"
+                          [disabled]="selectCheck(type.name,'phones',i)" [selected]="selectCheck(type.name,'phones',i)">
+                          {{type.name }}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-2 pl-1">
+                    <div class="form-group">
+                      <label></label>
+                      <button type="button" class="form-control btn btn-default"
+                        (click)="dell(i,'phones')">delete</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- #endregion -->
+
+
+
+          <!-- #region Email -->
+          <div class="row">
+            <div class="card">
+              <div class="card-header">
+                <div class="row">
+                  <div class="col-md-9 pr-1">
+                    <label>Emails</label>
+                  </div>
+                  <div class=" col-md-3 pl-1">
+                    <button class="btn btn-primary" type="button" (click)="add('emails')">
+                      Add email
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body" formArrayName="emails">
+                <div class="row" [formGroupName]="i"
+                  *ngFor="let phone of mainForm.controls['emails']['controls']; let i = index">
+                  <input formControlName="id" hidden />
+                  <div class="col-md-5 pr-1">
+                    <div class="form-group">
+                      <label>Valu</label>
+                      <input type="email" class="form-control" name="value" formControlName="value" />
+                    </div>
+                  </div>
+                  <div class="col-md-5 px-1">
+                    <div class="form-group">
+                      <label>Type</label>
+                      <select class="form-control" name="type" formControlName="type">
+                        <option value=""></option>
+                        <option *ngFor="let type of this.service.EmailType" [value]="type.name"
+                          [disabled]="selectCheck(type.name,'emails',i)" [selected]="selectCheck(type.name,'emails',i)">
+                          {{type.name }}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-2 pl-1">
+                    <div class="form-group">
+                      <label></label>
+                      <button type="button" class="form-control btn btn-default"
+                        (click)="dell(i,'emails')">delete</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- #endregion -->
+
+
+          <!-- #region sites -->
+          <div class="row">
+            <div class="card">
+              <div class="card-header">
+                <div class="row">
+                  <div class="col-md-9 pr-1">
+                    <label>Sites</label>
+                  </div>
+                  <div class=" col-md-3 pl-1">
+                    <button class="btn btn-primary" type="button" (click)="add('sites')">
+                      Add site
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body" formArrayName="sites">
+                <div class="row" [formGroupName]="i"
+                  *ngFor="let item of mainForm.controls['sites']['controls']; let i = index">
+                  <input formControlName="id" hidden />
+                  <div class="col-md-5 pr-1">
+                    <div class="form-group">
+                      <label>Valu</label>
+                      <input type="url" class="form-control" name="value" formControlName="value" />
+                    </div>
+                  </div>
+                  <div class="col-md-5 px-1">
+                    <div class="form-group">
+                      <label>Type</label>
+                      <select class="form-control" name="type" formControlName="type">
+                        <option value=""></option>
+                        <option *ngFor="let type of this.service.UrlType" [value]="type.name"
+                          [disabled]="selectCheck(type.name,'sites',i)" [selected]="selectCheck(type.name,'sites',i)">
+                          {{type.name }}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-2 pl-1">
+                    <div class="form-group">
+                      <label></label>
+                      <button type="button" class="form-control btn btn-default"
+                        (click)="dell(i,'sites')">delete</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- #endregion -->
+
+          <!-- #region Messanger -->
+          <div class="row">
+            <div class="card">
+              <div class="card-header">
+                <div class="row">
+                  <div class="col-md-9 pr-1">
+                    <label>Messangers</label>
+                  </div>
+                  <div class=" col-md-3 pl-1">
+                    <button class="btn btn-primary" type="button" (click)="add('messangerUrls')">
+                      Add messanger
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body" formArrayName="messangerUrls">
+                <div class="row" [formGroupName]="i"
+                  *ngFor="let item of mainForm.controls['messangerUrls']['controls']; let i = index">
+                  <input formControlName="id" hidden />
+                  <div class="col-md-5 pr-1">
+                    <div class="form-group">
+                      <label>Valu</label>
+                      <input type="text" class="form-control" name="value" formControlName="value" />
+                    </div>
+                  </div>
+                  <div class="col-md-5 px-1">
+                    <div class="form-group">
+                      <label>Type</label>
+                      <select class="form-control" name="type" formControlName="type">
+                        <option value=""></option>
+                        <option *ngFor="let type of this.service.MessangerUrlType" [value]="type.name"
+                          [disabled]="selectCheck(type.name,'messangerUrls',i)"
+                          [selected]="selectCheck(type.name,'messangerUrls',i)">
+                          {{type.name }}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-2 pl-1">
+                    <div class="form-group">
+                      <label></label>
+                      <button type="button" class="form-control btn btn-default"
+                        (click)="dell(i,'messangerUrls')">delete</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- #endregion -->
+
+
+
+          <!-- #region addresses -->
+          <div class="row">
+            <div class="card">
+              <div class="card-header">
+                <div class="row">
+                  <div class="col-md-9 pr-1">
+                    <label>Addresses</label>
+                  </div>
+                  <div class=" col-md-3 pl-1">
+                    <button class="btn btn-primary" type="button" (click)="add('addresses')">
+                      Add addresse
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="card-body" formArrayName="addresses">
+                <div class="row" [formGroupName]="i"
+                  *ngFor="let item of mainForm.controls['addresses']['controls']; let i = index">
+                  <input formControlName="id" hidden />
+                  <div class="col-md-5 pr-1">
+                    <div class="form-group">
+                      <label>Valu</label>
+                      <input type="text" class="form-control" name="value" formControlName="value" />
+                    </div>
+                  </div>
+                  <div class="col-md-5 px-1">
+                    <div class="form-group">
+                      <label>Type</label>
+                      <select class="form-control" name="type" formControlName="type">
+                        <option value=""></option>
+                        <option *ngFor="let type of this.service.AddressType" [value]="type.name"
+                          [disabled]="selectCheck(type.name,'addresses',i)"
+                          [selected]="selectCheck(type.name,'addresses',i)">
+                          {{type.name }}</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="col-md-2 pl-1">
+                    <div class="form-group">
+                      <label></label>
+                      <button type="button" class="form-control btn btn-default"
+                        (click)="dell(i,'addresses')">delete</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- #endregion -->
+
+
+
+
+
+
+
+
+
+
+
+
+          <!-- <div formArrayName="phones">
+            </div>
+            <div class="form-group">
+              <button class="btn btn-default" (click)="addPhone()">
+                Добавить телефон
+              </button>
+              <button class="btn btn-default" [disabled]="myForm.invalid">
+                Отправить
+              </button>
+            </div> -->
+
+
+
+          <!-- <address-form-comp 
+[(setItem)]="address"
+[index]="index"
+[(types)]="this.service.AddressType"
+[isEditMode]=true
+></address-form-comp>
+<div>{{address?.value}}</div>
+<div>{{address?.description}}</div>
+<div>{{address?.addressType?.name}}</div> -->
+
+          <!-- <div formArrayName="phones" #phonesArray>
+  <div class="form-group" *ngFor="let phone of myForm.controls['phones']['controls']; let i = index">
+      <label>Телефон</label>
+      <input class="form-control" formControlName="{{i}}" />
+  </div>
+</div>
+ -->
+
+
+          <!-- <ng-container formArrayName="phones" #phonesArray>
+            </ng-container>
+
+
+            <div class="form-group">
+              <button class="btn btn-default" (click)="addPhone()">
+                Добавить телефон
+              </button>
+              <button class="btn btn-default" [disabled]="myForm.invalid">
+                Отправить
+              </button>
+            </div>
+ -->
+
+
+
+
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

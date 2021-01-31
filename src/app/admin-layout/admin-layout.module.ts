@@ -19,7 +19,15 @@ import { NgxPaginationModule } from 'ngx-pagination';
 import { DashboardHandlerComponent } from '../dashboardHandler/dashboardHandler.component';
 import { DashboardUnauthorizedComponent } from '../dashboardUnauthorized/dashboardUnauthorized.component';
 import { PublicCompanysComponent } from '../publicComponents/publicCompanys/publicCompanys.component';
+import { ContactsComponent } from '../inputs/contact/contact.component';
+import { ContactsItemComponent } from '../inputs/contactItem/contactItem.component';
+import { AddressFormCompComponent } from '../inputs/address-form-comp/address-form-comp.component';
+import { PhoneFormComponent } from '../inputs/phone-form/phone-form.component';
 
+import {SelectsService} from '../services/Selects.service'; 
+import {DataService} from '../services/htttp.service'; 
+////////////////////////////////////////// material //////////////////////////////////////////
+import{MaterialModule}from '../material-module'
 //import { ApiAuthorizationModule } from '../api-authorization/api-authorization.module';
 //import { LoginMenuComponent } from '../api-authorization/login-menu/login-menu.component';
 //import { AuthorizeInterceptor } from '../api-authorization/authorize.interceptor';
@@ -27,13 +35,14 @@ import { PublicCompanysComponent } from '../publicComponents/publicCompanys/publ
 
 @NgModule({
   imports: [
-   // ApiAuthorizationModule,
     CommonModule,
     RouterModule.forChild(AdminLayoutRoutes),
     FormsModule,
+    ReactiveFormsModule,
     ChartsModule,
     NgbModule,
     NgxPaginationModule,
+    MaterialModule,
     ToastrModule.forRoot(),
 
    
@@ -51,9 +60,12 @@ import { PublicCompanysComponent } from '../publicComponents/publicCompanys/publ
     NotificationsComponent,
     PublicContactsComponent,
     PublicCompanysComponent,
-
+    ContactsComponent,
+    ContactsItemComponent,
+    AddressFormCompComponent,
+    PhoneFormComponent,
   ],
-  providers: [/*{ provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }*/],
+  providers: [DataService,SelectsService/*{ provide: HTTP_INTERCEPTORS, useClass: AuthorizeInterceptor, multi: true }*/],
 })
 
 export class AdminLayoutModule {}

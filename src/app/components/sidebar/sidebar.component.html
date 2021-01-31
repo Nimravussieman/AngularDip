@@ -1,14 +1,16 @@
-
 <div class="logo">
-    <a href="https://www.creative-tim.com" class="simple-text logo-mini">
-      <div class="logo-img">
-          <img src="./assets/img/angular2-logo-white.png"/>
-      </div>
+    <a href="" class="simple-text logo-mini">
+        <div class="logo-img">
+            <img src="./assets/img/angular2-logo-white.png" />
+        </div>
     </a>
-    <a href="https://www.creative-tim.com" class="simple-text logo-normal">
-        Creative Tim
+    <a href="" class="simple-text logo-normal">
+        {{logo}}
     </a>
 </div>
+
+
+
 <div class="sidebar-wrapper">
     <ul class="nav">
         <li routerLinkActive="active" *ngFor="let menuItem of menuItems" class="{{menuItem.class}} nav-item">
@@ -17,5 +19,41 @@
                 <p>{{menuItem.title}}</p>
             </a>
         </li>
+
+
+
+
+
+
+        <li class="nav-item" (click)="togle=!togle" *ngIf="!togle">
+            <a [routerLink]="">
+                <i class="now-ui-icons arrows-1_minimal-down" *ngIf="!togle"></i>
+                <i class="now-ui-icons arrows-1_minimal-up" *ngIf="togle"></i>
+                <p>Workspace</p>
+            </a>
+        </li>
+        <div class="dropdown-menu-arrow dropdown-menu-right" *ngIf="togle">
+
+            <div class="dropdown-divider"></div>
+
+            <!-- <div class=" dropdown-header noti-title">
+                <h6 class="text-overflow m-0">Welcome!</h6>
+            </div> -->
+            <!-- <a routerLinkActive="active" [routerLink]="['/account-profile']" class="dropdown-item">
+                <span>My profile</span>
+            </a>
+            <a routerLinkActive="active" [routerLink]="['/user-profile']" class="dropdown-item">
+                <span>Settings</span>
+            </a>
+            <a routerLinkActive="active" [routerLink]="['/icons']" class="dropdown-item">
+                <span>Icons</span>
+            </a> -->
+            <a routerLinkActive="active" [routerLink]="['/contactsItem']" class="dropdown-item">
+                <span>ContactsItem</span>
+            </a>
+            <div class="dropdown-divider"></div>
+        </div>
+
     </ul>
 </div>
+

@@ -14,7 +14,7 @@ export class DashboardHandlerComponent implements OnInit {
   // @ViewChild('notAuthorized', {static: false}) notAuthorized: TemplateRef<any>;
   // @ViewChild('authorized', {static: false}) authorized: TemplateRef<any>;
   
-  constructor(private authorizeService: AuthorizeService,private router:Router) { this.isAuthenticated = false }
+  constructor(private authorizeService: AuthorizeService/*,private router:Router*/) { this.isAuthenticated = false }
 
   ngOnInit() {
     /////////////////////////////////////////////////////////////////////////

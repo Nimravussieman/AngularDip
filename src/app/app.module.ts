@@ -1,6 +1,6 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { Routes,RouterModule } from '@angular/router';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -12,59 +12,73 @@ import { ComponentsModule } from './components/components.module';
 import { AppComponent } from './app.component';
 
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
+import { AccountProfileComponent } from './inputs/account-profile/account-profile.component';
+import { DialogInputsComponent } from './inputs/dialog-inputs/dialog-inputs.component';
+import { FormCompComponent } from './inputs/form-comp/form-comp.component';
+
+import { ApiAuthorizationModule } from '../app/api-authorization/api-authorization.module';
+import { AuthorizeInterceptor } from './api-authorization/authorize.interceptor';
 
 //import { HomeComponent } from '../app/TestComp/home/home.component';
 //import { DataComponent } from '../app/TestComp/data-component/data.component';
 //import { DataService } from '../app/services/htttp.service';
 
 
-import { ApiAuthorizationModule } from '../app/api-authorization/api-authorization.module';
-import { AuthorizeInterceptor } from './api-authorization/authorize.interceptor';
-import { AuthorizeGuard } from './api-authorization/authorize.guard';
-import { AdminLayoutModule } from './admin-layout/admin-layout.module';
+ import { LayoutModule } from '@angular/cdk/layout';
+// import { PhoneFormComponent } from '../app/inputs/phone-form/phone-form.component';
+import { MatInputModule } from '@angular/material/input';
+import { MatButtonModule } from '@angular/material/button';
+import { MatSelectModule } from '@angular/material/select';
+import { MatRadioModule } from '@angular/material/radio';
+import { MatCardModule } from '@angular/material/card';
 
+//////////////////////////////////////////////////////////////////////////
 
-//const appRoutes: Routes = [
-//  { path: '', component: AppComponent, pathMatch: 'full' },
-//  //{ path: '', redirectTo: 'dashboard', pathMatch: 'full', },
-//  //{ path: '', component: AdminLayoutComponent, canActivate: [AuthorizeGuard] },
-//  //{
-//  //  path: '', component: AdminLayoutComponent, pathMatch: 'full', canActivate: [AuthorizeGuard],
-//  //children:
-//  //[
-//  //    { path: '', loadChildren: './admin-layout.module#AdminLayoutModule' },
-
-//  //]},
-
-//  //{ path: 'home', component: HomeComponent},
-//  //{ path: 'data', component: DataComponent, canActivate: [AuthorizeGuard] },
-//  ////{ path: '**', component: HomeComponent }
-//  //{ path: '**', redirectTo: 'dashboard' }
-
-//];
 
 
 @NgModule({
   imports: [
     /////////////////////////////////////////
     ApiAuthorizationModule,
-        /////////////////////////////////////////
+    
+    /////////////////////////////////////////
 
     BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     ComponentsModule,
+    
     RouterModule,
     AppRoutingModule,
     NgbModule,
     ToastrModule.forRoot(),
 
+    // MatButtonModule,
+    // MatRadioModule,
+    // MatCardModule,
+    ReactiveFormsModule,
+     LayoutModule,
+     MatInputModule,
+     MatButtonModule,
+     MatSelectModule,
+     MatRadioModule,
+     MatCardModule,
+    // MatToolbarModule,
+    // MatSidenavModule,
+    // MatIconModule,
+    // MatListModule,
+    // MatSelectModule,
 
    // RouterModule.forRoot(appRoutes)
   ],
   declarations: [
     AppComponent,
-    AdminLayoutComponent
+    AdminLayoutComponent,
+    FormCompComponent,
+    AccountProfileComponent,
+    DialogInputsComponent,
+    // PhoneFormComponent,
+    
 ///////////////////////////////////////////////
     //HomeComponent,
     //DataComponent,

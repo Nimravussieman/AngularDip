@@ -5,8 +5,6 @@ import { Routes, RouterModule } from '@angular/router';
 
 import { AdminLayoutComponent } from './admin-layout/admin-layout.component';
 
-import { HomeComponent } from '../app/TestComp/home/home.component';
-import { ApiAuthorizationModule } from './api-authorization/api-authorization.module';
 
 
   //{
@@ -22,9 +20,6 @@ const routes: Routes = [
   //  //canLoad: [featureOneGuard]
   //},
 
-  //{path: '', component: HomeComponent},
-  //{ path: 'authentication', loadChildren: () => ApiAuthorizationModule },
-  //{ path: 'authentication/profile', loadChildren: () => ApiAuthorizationModule },
 
   {    path: '', redirectTo: 'dashboard', pathMatch: 'full',  },
   {
@@ -34,8 +29,6 @@ const routes: Routes = [
       ]
   },
 
-
-  //{ path: '**', redirectTo: '' }
 
   {    path: '**', redirectTo: 'dashboard'  }
 ];

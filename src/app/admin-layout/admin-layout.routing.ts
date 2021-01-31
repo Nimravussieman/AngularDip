@@ -11,10 +11,23 @@ import { UpgradeComponent } from '../upgrade/upgrade.component';
 import { PublicContactsComponent } from '../publicComponents/publicContacts/publicContact.component';
 import { PublicCompanysComponent } from '../publicComponents/publicCompanys/publicCompanys.component';
 import { DashboardHandlerComponent } from '../dashboardHandler/dashboardHandler.component';
+import { ContactsComponent } from '../inputs/contact/contact.component';
+import { AccountProfileComponent } from '../inputs/account-profile/account-profile.component';
+import { ContactsItemComponent } from '../inputs/contactItem/contactItem.component';
+
 
 export const AdminLayoutRoutes: Routes = [
     //{ path: 'dashboard',      component: DashboardComponent },
     { path: 'dashboard',      component: DashboardHandlerComponent },
+    { path: 'contactsItem',      component: ContactsItemComponent },
+    { path: 'contact',      component: ContactsComponent },
+    { path: 'account-profile',   component: AccountProfileComponent },
+    { path: 'contactsItem',      component: ContactsItemComponent },
+
+    
+
+
+
     { path: 'user-profile',   component: UserProfileComponent },
     { path: 'table-list',     component: TableListComponent },
     { path: 'typography',     component: TypographyComponent },

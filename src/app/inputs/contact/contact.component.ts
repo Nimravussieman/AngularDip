@@ -1,17 +1,17 @@
 import { Component, TemplateRef, ViewChild } from "@angular/core";
-import { PublicContact } from '../../Models/_models';
+//import { PublicContactModel } from '../Models/PublicContactModel';
 import { DataService } from "../../services/htttp.service";//src/app/services/htttp.service
 
 @Component({
-  selector: 'public-contacts',
-  templateUrl: './publicContact.component.html',
-  styleUrls: ['./publicContact.component.css'],
+  selector: 'contacts',
+  templateUrl: './contact.component.html',
+  styleUrls: ['./contact.component.css'],
   providers: [DataService]
 })
-export class PublicContactsComponent {
+export class ContactsComponent {
   items: any[] = [];
   name: string;
-  currentItem?: PublicContact;
+  currentItem?;
   currentIndex = -1;
   page = 1;
   count = 0;
@@ -22,17 +22,27 @@ export class PublicContactsComponent {
   @ViewChild('partNotNextTemplate', { static: false }) partNotNextTemplate: TemplateRef<any>;
   @ViewChild('partArrayTemplate', { static: false }) partArrayTemplate: TemplateRef<any>;
 
-  constructor(private dataService: DataService) { }
-  // ngOnInit(): void {
-  //   this.retrieveItems();
-  // }
 
+  folders = ['a','b','c'];
+  notes=[1,2,3,4.5];
+
+
+  constructor(private dataService: DataService) { }
+  
+  ngOnInit(): void {
+    this.retrieveItems();
+  }
+
+  show() {
+    this.dataService.getContacts().subscribe(c => this.name = c as string);
+    console.log(': I am doing something');
+  }
 
   retrieveItems(): void {
-    //if (typeof this.name == 'undefined' || !this.name) return;
+    if (typeof this.name == 'undefined' || !this.name) return;
     const params = this.getRequestParams(this.name, this.page, this.pageSize);
 
-    this.dataService.getContactsPaginations(params)
+    this.dataService.getAuthAccountContactsPaginations(params)
       .subscribe(
         response => {
           const { items, totalItems } = response;
@@ -52,6 +62,11 @@ export class PublicContactsComponent {
     this.retrieveItems();
   }
 
+  // handlePageSizeChange(event: any): void {
+  //   this.pageSize = event.target.value;
+  //   this.page = 1;
+  //   this.retrieveItems();
+  // }
 
   getRequestParams(searchString: string, page: number, pageSize: number): any {
     // tslint:disable-next-line:prefer-const
@@ -77,6 +92,18 @@ export class PublicContactsComponent {
     this.currentIndex = index;
   }
 
+  // removeAllItems(): void {
+  //   this.dataService.deleteAll()
+  //     .subscribe(
+  //       response => {
+  //         console.log(response);
+  //         this.refreshList();
+  //       },
+  //       error => {
+  //         console.log(error);
+  //       });
+  // }
+
 
   loadTemplate(item: Object) {
     if (this.isCurrentItem(item)) {
@@ -98,61 +125,3 @@ export class PublicContactsComponent {
   isCurrentItem(item): boolean { return this.currentItem && this.currentItem == item }
   isObject(val): boolean { return val && typeof val === 'object' }
 }  
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-  // handlePageSizeChange(event: any): void {
-  //   this.pageSize = event.target.value;
-  //   this.page = 1;
-  //   this.retrieveItems();
-  // }
-
-
-
-
-
-
-
-  // removeAllItems(): void {
-  //   this.dataService.deleteAll()
-  //     .subscribe(
-  //       response => {
-  //         console.log(response);
-  //         this.refreshList();
-  //       },
-  //       error => {
-  //         console.log(error);
-  //       });
-  // }

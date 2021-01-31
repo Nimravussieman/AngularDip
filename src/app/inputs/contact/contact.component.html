@@ -1,0 +1,219 @@
+<div class="panel-header panel-header-sm">
+</div>
+<div class="main-content">
+
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card">
+        <div class="card-header">
+
+
+
+          <div class="container">
+            <h2>Nested Media Objects</h2>
+            <p>Media objects can also be nested (a media object inside a media object):</p><br>
+            <div class="media">
+              <div class="media-left">
+                <img src="img_avatar1.png" class="media-object" style="width:45px">
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading">John Doe <small><i>Posted on February 19, 2016</i></small></h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                  et dolore magna aliqua.</p>
+
+                <!-- Nested media object -->
+                <div class="media">
+                  <div class="media-left">
+                    <img src="img_avatar2.png" class="media-object" style="width:45px">
+                  </div>
+                  <div class="media-body">
+                    <h4 class="media-heading">John Doe <small><i>Posted on February 19, 2016</i></small></h4>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                      labore et dolore magna aliqua.</p>
+
+                    <!-- Nested media object -->
+                    <div class="media">
+                      <div class="media-left">
+                        <img src="img_avatar3.png" class="media-object" style="width:45px">
+                      </div>
+                      <div class="media-body">
+                        <h4 class="media-heading">John Doe <small><i>Posted on February 19, 2016</i></small></h4>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                          labore et dolore magna aliqua.</p>
+                      </div>
+                    </div>
+
+                  </div>
+                </div>
+
+              </div>
+            </div>
+            <div class="media">
+              <div class="media-left">
+                <img src="img_avatar1.png" class="media-object" style="width:45px">
+              </div>
+              <div class="media-body">
+                <h4 class="media-heading">John Doe <small><i>Posted on February 19, 2016</i></small></h4>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore
+                  et dolore magna aliqua.</p>
+              </div>
+            </div>
+          </div>
+
+          //////////////////////////////////////////////////////////////////////////////////
+
+          ///////////////////////////////////////////////////////////////////////////////////
+          <mat-slider min="1" max="100" step="1" value="1"></mat-slider>
+          ///////////////////////////////////////////////////////////////////////////////////
+
+
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              This is the expansion title
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              Some deferred content
+            </ng-template>
+          </mat-expansion-panel>
+
+          <mat-expansion-panel [expanded]="true">
+            <mat-expansion-panel-header>
+              This is the expansion title
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+
+              <mat-expansion-panel>
+                <mat-expansion-panel-header>
+                  This is the expansion title
+                </mat-expansion-panel-header>
+
+                <ng-template matExpansionPanelContent>
+                  Some deferred content
+                </ng-template>
+              </mat-expansion-panel>
+
+            </ng-template>
+          </mat-expansion-panel>
+
+
+          <mat-expansion-panel>
+            <mat-expansion-panel-header>
+              This is the expansion title
+            </mat-expansion-panel-header>
+
+            <ng-template matExpansionPanelContent>
+              Some deferred content
+            </ng-template>
+          </mat-expansion-panel>
+
+        </div>
+      </div>
+
+      <div data-color="blue">
+        <mat-list>
+          <div mat-subheader>Folders</div>
+          <mat-list-item *ngFor="let folder of folders">
+            <mat-icon mat-list-icon>folder</mat-icon>
+            <div mat-line>{{folder.name}}</div>
+            <div mat-line> {{folder.updated | date}} </div>
+          </mat-list-item>
+          <mat-divider></mat-divider>
+          <div mat-subheader>Notes</div>
+          <mat-list-item *ngFor="let note of notes">
+            <mat-icon mat-list-icon>note</mat-icon>
+            <div mat-line>{{note.name}}</div>
+            <div mat-line> {{note.updated | date}} </div>
+          </mat-list-item>
+        </mat-list>
+      </div>
+
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+<!-- <ul class="nav">
+       <li routerLinkActive="active" *ngFor="let contact of contacts" class="{{menuItem.class}} nav-item">
+           <a [routerLink]="[menuItem.path]">
+               <i class="now-ui-icons {{menuItem.icon}}"></i>
+               <p>{{menuItem.title}}</p>
+           </a>
+       </li>
+   </ul> -->
+
+<!--<div class="row">
+    <div class="col-md-12">
+      <div class="card ">
+        <div class="card-header ">
+          Google Maps
+        </div>
+        <div class="card-body ">
+          <div id="map" class="map"></div>
+        </div>
+      </div>
+    </div>
+  </div>-->
+
+
+
+
+
+
+
+  <mat-form-field appearance="fill">
+    <mat-label>Choose an option</mat-label>
+    <select [(ngModel)]="selected" matNativeControl [disabled]="disableSelect.value">
+      <option value="" selected></option>
+      <option [disabled]="compare(item)" *ngFor="let item of mas" [value]="item">{{item}}</option>
+    </select>
+  </mat-form-field>
+  
+
+
+
+
+
+
+
+
+
+  <mat-form-field appearance="fill">
+    <mat-label>Favorite food</mat-label>
+    <mat-select>
+      <mat-option *ngFor="let i of mas" [value]="i">
+        {{i}}
+      </mat-option>
+    </mat-select>
+  </mat-form-field>      
+
+
+  <mat-form-field appearance="fill">
+  <mat-label>Select an option</mat-label>
+  <mat-select [(ngModel)]="selected" [compareWith]="compareObjects">
+    <mat-option>None</mat-option>
+    <mat-option *ngFor="let item of this.service.AddressType" [value]="item">{{item.name}}</mat-option>
+  </mat-select>
+</mat-form-field>
+
+
+<p>You selected: {{selected}}</p>
+
+
+<mat-form-field appearance="fill">
+<mat-label>Favorite Car</mat-label>
+<select matNativeControl (change)="selectCar($event)">
+  <option value=""></option>
+  <option *ngFor="let option of cars" [value]="option.value"
+          [selected]="selectedCar === option.value">{{ option.viewValue }}</option>
+</select>
+</mat-form-field>
+<p>You selected: {{selectedCar}}</p>

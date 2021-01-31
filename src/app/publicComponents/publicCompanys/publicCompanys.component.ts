@@ -1,5 +1,4 @@
 import { Component, TemplateRef, ViewChild } from "@angular/core";
-import { PublicContactModel } from '../../Models/PublicContactModel';
 import { DataService } from "../../services/htttp.service";//src/app/services/htttp.service
 
 @Component({
@@ -27,15 +26,13 @@ import { DataService } from "../../services/htttp.service";//src/app/services/ht
     //   this.retrieveItems();
     // }
   
-    show() {
-      this.dataService.getContacts().subscribe(c => this.name = c as string);
-      console.log(': I am doing something');
-    }
+    // show() {
+    //   this.dataService.getContacts().subscribe(c => this.name = c as string);
+    //   console.log(': I am doing something');
+    // }
   
     retrieveItems(): void {
-      console.log('retrieveItems: before');
-      if (typeof this.name == 'undefined' || !this.name) return;
-      console.log('retrieveItems: after');
+      //if (typeof this.name == 'undefined' || !this.name) return;
       const params = this.getRequestParams(this.name, this.page, this.pageSize);
   
       this.dataService.getCompanysPaginations(params)
@@ -58,12 +55,6 @@ import { DataService } from "../../services/htttp.service";//src/app/services/ht
       this.retrieveItems();
     }
   
-    // handlePageSizeChange(event: any): void {
-    //   this.pageSize = event.target.value;
-    //   this.page = 1;
-    //   this.retrieveItems();
-    // }
-  
     getRequestParams(searchString: string, page: number, pageSize: number): any {
       // tslint:disable-next-line:prefer-const
       let params: any = {};
@@ -73,7 +64,7 @@ import { DataService } from "../../services/htttp.service";//src/app/services/ht
       }
   
       if (page) {
-        params[`pageNumber`] = page;//  -1
+        params[`pageNumber`] = page;
       }
   
       if (pageSize) {
@@ -88,17 +79,6 @@ import { DataService } from "../../services/htttp.service";//src/app/services/ht
       this.currentIndex = index;
     }
   
-    // removeAllItems(): void {
-    //   this.dataService.deleteAll()
-    //     .subscribe(
-    //       response => {
-    //         console.log(response);
-    //         this.refreshList();
-    //       },
-    //       error => {
-    //         console.log(error);
-    //       });
-    // }
   
     loadTemplate(item: Object) {
       if (this.isCurrentItem(item)) {
@@ -120,4 +100,59 @@ import { DataService } from "../../services/htttp.service";//src/app/services/ht
     isCurrentItem(item): boolean { return this.currentItem && this.currentItem == item }
     isObject(val): boolean { return val && typeof val === 'object' }
   }  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    // removeAllItems(): void {
+    //   this.dataService.deleteAll()
+    //     .subscribe(
+    //       response => {
+    //         console.log(response);
+    //         this.refreshList();
+    //       },
+    //       error => {
+    //         console.log(error);
+    //       });
+    // }
+
+
+
+
+      // handlePageSizeChange(event: any): void {
+    //   this.pageSize = event.target.value;
+    //   this.page = 1;
+    //   this.retrieveItems();
+    // }
   
